@@ -1,0 +1,4 @@
+name: backdrop-playgrounds
+recipe: lemp
+config:
+  webroot: web
