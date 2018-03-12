@@ -2,3 +2,17 @@ name: backdrop-playgrounds
 recipe: lemp
 config:
   webroot: web
+
+services:
+  appserver:
+    extras:
+      # Install Lando
+      - apt-get -y update
+      - apt-get -y install cgroup-bin curl iptables apt-transport-https ca-certificates gnupg2 software-properties-common
+      - curl -fsSL https://download.docker.com/linux/$(. /etc/os-release; echo "$ID")/gpg | apt-key add -
+      - add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") deb [arch=amd64] https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") $(lsb_release -cs)  stable"
+      - apt-get update
+      - apt-get install docker-ce
+      - curl -fsSL -o /tmp/lando.deb https://github.com/lando/lando/releases/download/v3.0.0-beta.35/lando-v3.0.0-beta.35.deb
+      - dpkg -i /tmp/lando.deb
+
